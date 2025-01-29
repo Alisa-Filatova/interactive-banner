@@ -55,28 +55,29 @@
       <!-- GAME -->
       <div class="game">
         <!-- Dirt -->
-        <div class="dirt dirt--fridge"></div>
-        <div class="dirt dirt--oven"></div>
-        <div class="dirt dirt--plate"></div>
-        <div class="dirt dirt--dishes"></div>
-        <div class="dirt dirt--switcher"></div>
-        <div class="dirt dirt--sink"></div>
-        <div class="dirt dirt--door"></div>
+        <div class="dirt dirt--fridge" data-item="fridge"></div>
+        <div class="dirt dirt--oven" data-item="oven"></div>
+        <div class="dirt dirt--plate" data-item="plate"></div>
+        <div class="dirt dirt--dishes" data-item="dishes"></div>
+        <div class="dirt dirt--switcher" data-item="switcher"></div>
+        <div class="dirt dirt--sink" data-item="sink"></div>
+        <div class="dirt dirt--door" data-item="door"></div>
         <!-- SCREEN 1 START -->
         <div class="game__screen onboarding">
           <div 
             class="fridge"
             data-cleaned="false"
           >
-            <div class="foam fridge__foam"></div>
+            <div class="foam fridge__foam" data-item="fridge"></div>
             <div class="popup">
               <img 
-                class="popup__bacterium" 
+                class="bacterium popup__bacterium" 
                 src="img/bacterium-salad-green.png" 
                 alt="" 
                 width="230"
                 height="270"
                 draggable="false"
+                data-item="fridge"
               > 
               <p class="popup__description">
                 <span class="popup__icon"></span>
@@ -91,45 +92,48 @@
             class="kitchen__item oven"
             data-cleaned="false"
           >
-            <div class="foam oven__foam"></div>
+            <div class="foam oven__foam" data-item="oven"></div>
             <img
-              class="oven__bacterium" 
+              class="bacterium oven__bacterium" 
               src="img/bacterium-purple.png" 
               alt="" 
               width="209" 
               height="209"
               draggable="false"
+              data-item="oven"
             >
           </div>
           <div 
             class="kitchen__item plate"
             data-cleaned="false"
           >
-            <div class="foam plate__foam"></div>
+            <div class="foam plate__foam" data-item="plate"></div>
             <img 
-              class="plate__bacterium" 
+              class="bacterium plate__bacterium" 
               src="img/bacterium-brown.png" 
               alt="" 
               width="203" 
               height="204"
               draggable="false"
+              data-item="plate"
             >
           </div>
           <div 
             class="kitchen__item dishes"
             data-cleaned="false"
           >
-            <div class="foam dishes__foam"></div>
+            <div class="foam dishes__foam" data-item="dishes"></div>
             <div class="dishes__foam-box">
-              <div class="foam dishes__foam--puddle"></div>
+              <div class="foam dishes__foam--puddle data-item="dishes"></div>
             </div>
             <div class="dishes__bacterium-box">
               <img 
-                class="dishes__bacterium" 
+                class="bacterium dishes__bacterium" 
                 src="img/bacterium-blue.png" 
                 alt="" 
                 width="218" 
                 draggable="false"
+                data-item="dishes"
               >
             </div>
           </div>
@@ -140,14 +144,15 @@
             class="switcher"
             data-cleaned="false"
           >
-            <div class="foam switcher__foam"></div>
+            <div class="foam switcher__foam" data-item="switcher"></div>
             <img 
-              class="switcher__bacterium" 
+              class="bacterium switcher__bacterium" 
               src="img/bacterium-green.png" 
               alt="" 
               width="263" 
               height="262"
               draggable="false"
+              data-item="switcher"
             >
           </div>
         </div>
@@ -157,14 +162,15 @@
             class="sink"
             data-cleaned="false"
           >
-            <div class="foam sink__foam"></div>
-            <div class="sink__bacterium-box">
+            <div class="foam sink__foam" data-item="sink"></div>
+            <div class="sink__bacterium-box" data-item="sink">
               <img 
-                class="sink__bacterium" 
+                class="bacterium sink__bacterium" 
                 src="img/bacterium-salad-green.png" 
                 alt="" 
                 width="210" 
                 draggable="false"
+                data-item="sink"
               >
             </div>
           </div>
@@ -172,14 +178,15 @@
             class="door"
             data-cleaned="false"
           >
-            <div class="foam door__foam"></div>
+            <div class="foam door__foam" data-item="door"></div>
             <img 
-              class="door__bacterium" 
+              class="bacterium door__bacterium" 
               src="img/bacterium-orange.png" 
               alt="" 
               width="283" 
               height="283"
               draggable="false"
+              data-item="door"
             >
           </div>
         </div>
@@ -191,11 +198,11 @@
       <!-- FINAL SCREEN -->
       <div class="finish-screen">
         <div class="finish-screen__text">
-          <span class="finish-screen__looser-text">
+          <span class="finish-screen__loose-text">
             Для удаления всех пятен
           </span>
           <h2 class="title finish-screen__title">
-            Крем-пена 100% чистота
+            Крем-пена <span>100% чистота</span>
           </h2>
           <p class="description finish-screen__description">
             От кухни до ванной
@@ -209,8 +216,7 @@
           src="img/product.png" 
           draggable="false" 
           alt="Крем-пена 100% Чистота" 
-          width="408" 
-          height="748" 
+          width="320"
         >
       </div>
     </div>

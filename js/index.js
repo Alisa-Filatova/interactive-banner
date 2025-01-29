@@ -1,14 +1,32 @@
-const canvasWidth = 2503;
-const frameWidth = 1080;
-
-const playButton = document.querySelector('.start-screen__button');
-const startScreen = document.querySelector('.start-screen');
-const game = document.querySelector('.game');
-const fridge = document.querySelector('.fridge');
-
 const setDataCleaned = (item) => {
   item.setAttribute('data-cleaned', true);
 };
+
+const hideElement = (element, duration = 0.5) => {
+  gsap.to(element, {
+    opacity: 0, 
+    duration: duration, 
+    onComplete: () => {
+      if (!element.classList.contains('hidden')) {
+        element.classList.add('hidden');
+      }
+    }
+  });
+}
+
+const showElement = (element, duration = 0.5, delay = 0) => {
+
+  gsap.to(element, {
+    onStart: () => {
+      if (element.classList.contains('hidden')) {
+        element.classList.remove('hidden');
+      }
+    },
+    opacity: 1, 
+    duration: duration,
+    delay: delay,
+  });
+}
 
 const bannerTextTween = (title, text, button) => {
   const textTL = gsap.timeline();
@@ -21,96 +39,71 @@ const bannerTextTween = (title, text, button) => {
   textTL.from(text, { 
     opacity: 0,
     duration: 1.5,
-  }, "-=1");
+  }, '-=1.2');
   
   textTL.from(button, { 
     opacity: 0,
     scale: 1.1,
     duration: 1.5,
-    ease: "bounce.out",
-  }, "-=1");
+    ease: 'bounce.out',
+  }, '-=1.5');
 }
 
-const jumpingBacteriumsTween = () => {
-  const bacteruimTL = gsap.timeline();
+const getFoam = (bacterium) => {
+  const item = bacterium.getAttribute('data-item');
+  return document.querySelector(`.${item}__foam`);
+};
 
-  bacteruimTL.to(".start-screen__bacterium", {
+const getDirt = (bacterium) => {
+  const item = bacterium.getAttribute('data-item');
+  return document.querySelector(`.dirt--${item}`);
+};
+
+const getItem = (bacterium) => {
+  const item = bacterium.getAttribute('data-item');
+  return document.querySelector(`.${item}`);
+};
+
+const jumpingBacteriumsTween = () => {
+  const bacteriumTL = gsap.timeline();
+
+  bacteriumTL.to('.start-screen__bacterium', {
     stagger: 0.25,
     y: 30,
     repeat: -1,
     yoyo: true,
     duration: 2,
-    ease: "bounce.out",
+    ease: 'bounce.out',
   });
   
-  bacteruimTL.to(".start-screen__bacterium--brown", { 
+  bacteriumTL.to('.start-screen__bacterium--brown', { 
     y: 25,
     duration: 1,
-  }, "+=1");
+  }, '+=1');
   
-  bacteruimTL.to(".start-screen__bacterium--salad-green", { 
+  bacteriumTL.to('.start-screen__bacterium--salad-green', { 
     y: 20,
     duration: 1.5,
-  }, "+=1.5");
+  }, '+=1.5');
 }
 
-const startScreenTween = () => {
+const initStartScreenAnim = () => {
   jumpingBacteriumsTween();
-  bannerTextTween(".start-screen__title", ".start-screen__description", playButton);
+  bannerTextTween('.start-screen__title', '.start-screen__description', '.start-screen__button');
 } 
 
-startScreenTween();
+initStartScreenAnim();
 
-const showOnboardingPopup = () => {
-  gsap.to(".popup__description", { 
-    opacity: 1,
-    duration: 0.5,
-  });
+const canvasWidth = 2503;
+const frameWidth = 1080;
+const gameTime = 15;
 
-  gsap.to(".popup__icon", { 
-    x: 20,
-    repeat: -1,
-    duration: 0.5,
-    yoyo: true,
-    delay: 0.5,
-    ease: "in",
-  });      
-}
-
-const hideStartScreen = () => {
-  gsap.to(startScreen, {
-    opacity: 0, 
-    duration: 0.5, 
-    onComplete: () => {
-      startScreen.classList.add('hidden'); 
-    }
-  });
-}
-
-const showGameScreen = () => {
-  gsap.to(game, {
-    opacity: 1, 
-    duration: 0.5,
-    onComplete: () => {
-      showOnboardingPopup();
-    }
-  });
-}
-
-playButton.addEventListener('click', (event) => {
-  event.preventDefault();
-  hideStartScreen();
-  showGameScreen();
-});
-
+const startScreen = document.querySelector('.start-screen');
 const onboardingScreen = document.querySelector('.onboarding');
 const kitchenScreen = document.querySelector('.kitchen');
 const switcherWallScreen = document.querySelector('.switcher-wall');
 const bathroomScreen = document.querySelector('.bathroom');
 const finishScreen = document.querySelector('.finish-screen');
-
-const timer = document.querySelector('.timer');
-const timerBar = document.querySelector('.timer__bar');
 
 const fridgeBacterium = document.querySelector('.popup__bacterium');
 const ovenBacterium = document.querySelector('.oven__bacterium');
@@ -120,151 +113,358 @@ const switcherBacterium = document.querySelector('.switcher__bacterium');
 const sinkBacterium = document.querySelector('.sink__bacterium');
 const doorBacterium = document.querySelector('.door__bacterium');
 
-const fridgeFoam = document.querySelector('.fridge__foam');
-const fridgeDirt = document.querySelector('.dirt--fridge');
-const oven = document.querySelector('.oven');
-const plate = document.querySelector('.plate');
-const dishwasher = document.querySelector('.dishes');
+const showOnboardingPopup = () => {
+  showElement('.popup__description');
 
-const finishgame = () => {
-  finishScreen.classList.remove('hidden');
-  gsap.to(finishScreen, {opacity: 1, duration: 1});
-  game.classList.add('hidden');
-  gsap.to(timer, {display: 'none'});
+  gsap.to('.popup__icon', { 
+    x: 20,
+    repeat: -1,
+    duration: 0.5,
+    yoyo: true,
+    delay: 0.5,
+    ease: 'in',
+  });      
 }
 
-const runGame = () => {
-  gsap.to(kitchenScreen, {opacity: 1});
-  gsap.to(timer, {opacity: 1, duration: 0.5});
-  gsap.to(onboardingScreen, {display: 'none'});
+const game = document.querySelector('.game');
+
+const showGameScreen = () => {
+  showElement(game);
   gsap.to(game, {
-    x: canvasEndPositionX, 
-    duration: 20, 
-    delay: 1, 
     onComplete: () => {
-    finishgame();
-  }});
+      showOnboardingPopup();
+    }
+  });
 }
+
+const hideStartScreen = () => {
+  hideElement(startScreen);
+}
+
+const playButton = document.querySelector('.start-screen__button');
+
+playButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  hideStartScreen();
+  showGameScreen();
+});
+
+const checkResult = () => {
+  const dirtyItems = document.querySelectorAll('[data-cleaned="false"]');
+  const result = Array.from(dirtyItems);
+
+  if (result.length === 0) {
+    finishScreen.classList.add('finish-screen__text--win')
+  }
+}
+
+const showFinishScreen = () => {
+  showElement(finishScreen, 1);
+  bannerTextTween('.finish-screen__title', '.finish-screen__description', '.finish-screen__button');
+}
+
+const timer = document.querySelector('.timer');
+const timerBar = document.querySelector('.timer__bar');
 
 const runTimer = () => {
   const timerTl = gsap.timeline();
 
-  timerTl.to(timerBar, {
-    width: "2%", 
-    duration: 20,
+  timerTl.to(timer, {
+    opacity: 1, 
+    duration: 0.5,
   });
 
   timerTl.to(timerBar, {
-    backgroundColor: "var(--color-red-light)", 
-    duration: 5
-  }, "-=10");
+    width: '3%', 
+    duration: gameTime,
+  });
+
+  timerTl.to(timerBar, {
+    backgroundColor: 'var(--color-red-light)', 
+    duration: 5,
+  }, '-=10');
+}
+
+const finishGame = () => {
+  checkResult();
+  hideGameScreen();
+  showFinishScreen();
 }
 
 const startGame = () => {
-  const tl = gsap.timeline();
   const canvasEndPositionX = (canvasWidth - frameWidth) * -1;
 
-  tl.to('.popup', {opacity: 0, duration: 0.5});
-  tl.to(fridgeFoam, {opacity: 1, duration: 0.5});
-  tl.to(fridgeFoam, {y: 410, duration: 2});
-  tl.to(fridgeDirt, {opacity: 0, duration: 2}, "-=2");
-  tl.to(fridgeFoam, {opacity: 0, duration: 2, onComplete: () => {
-    gsap.to(kitchenScreen, {opacity: 1});
-    gsap.to(timer, {opacity: 1, duration: 0.5});
-    gsap.to(onboardingScreen, {display: 'none'});
-    gsap.to(game, {
-      x: canvasEndPositionX, 
-      duration: 20, 
-      delay: 1, 
-      onComplete: () => {
-      finishgame();
-    }});
-    runTimer();
-  }, 
-  },"-=2");
+  showElement(kitchenScreen);
+
+  gsap.to(game, {
+    x: canvasEndPositionX, 
+    duration: gameTime, 
+    delay: 1, 
+    ease: "power.out",
+    onComplete: () => {
+      finishGame();
+    }
+  });
+  runTimer();
+}
+
+const startOnboarding = () => {
+  const tl = gsap.timeline();
+
+  const foam = getFoam(fridgeBacterium);
+  const dirt = getDirt(fridgeBacterium);
+  const item = getItem(fridgeBacterium);
+
+  tl.to('.popup', {
+    opacity: 0, 
+    duration: 0.5
+  });
+  tl.to(foam, {
+    opacity: 1, 
+    duration: 0.5
+  });
+  tl.to(foam, {
+    y: 410, 
+    duration: 2
+  });
+  tl.to(dirt, {
+    opacity: 0, 
+    duration: 2
+  }, '-=2');
+  tl.to(foam, {
+    opacity: 0, 
+    duration: 2, 
+    onComplete: () => {
+      hideElement(onboardingScreen);
+      startGame();
+    }, 
+  },'-=2');
+  setDataCleaned(item);
 }
 
 fridgeBacterium.addEventListener('click', () => {
-  startGame();
-  setDataCleaned(fridge);
+  startOnboarding();
 });
 
-const secondFoam = document.querySelector('.oven__foam');
-const ovenDirt = document.querySelector('.dirt--oven');
-const plateDirt = document.querySelector('.dirt--plate');
-const plateFoam = document.querySelector('.plate__foam');
-
-const dishesDirt = document.querySelector('.dirt--dishes');
-const dishesFoam = document.querySelector('.dishes__foam');
-const dishesFoam2 = document.querySelector('.dishes__foam-box');
-
-const switcherDirt = document.querySelector('.dirt--switcher');
-const switcherFoam = document.querySelector('.switcher__foam');
-
-const sinkDirt = document.querySelector('.dirt--sink');
-const sinkFoam = document.querySelector('.sink__foam');
-
-const doorDirt = document.querySelector('.dirt--door');
-const doorFoam = document.querySelector('.door__foam');
-
-const showNextScreen = (screen) => {
-  gsap.to(screen, {opacity: 1, duration: 1, delay: 1});
+const showSwitcherScreen = () => {
+  showElement(switcherWallScreen, 1, 1);
 }
 
-const checkKitchen = () => {
+const hideGameScreen = () => {
+  hideElement(timer);
+  hideElement(game);
+}
+
+const checkKitchenDirt = () => {
   const kitchen = document.querySelectorAll('.kitchen__item');
-  const result = Array.from(kitchen).every((element) => element.hasAttribute('data-cleaned') && element.getAttribute('data-cleaned') === 'true');
+  const result = 
+    Array.from(kitchen).every((element) => {
+      return element.hasAttribute('data-cleaned') && element.getAttribute('data-cleaned') === 'true';
+    });
 
   if (result === true) {
-    showNextScreen(switcherWallScreen);
+    showSwitcherScreen(switcherWallScreen);
   }
 }
 
 ovenBacterium.addEventListener('click', () => {
   const tl = gsap.timeline();
-  tl.to(ovenBacterium, {opacity: 0, duration: 0.5}).to(secondFoam, {opacity: 1, duration: 1}).to(secondFoam, {y: 410, duration: 3}).to(secondFoam, {opacity: 0, duration: 3}, "-=2");
-  tl.to(ovenDirt, {opacity: 0, duration: 3}, "-=3").to(ovenDirt, {display: 'none'});
-  setDataCleaned(oven);
-  checkKitchen();
+  const item = getItem(ovenBacterium);
+  const foam = getFoam(ovenBacterium);
+  const dirt = getDirt(ovenBacterium);
+
+  tl.to(ovenBacterium, {
+    opacity: 0, 
+    duration: 0.5,
+  });
+  tl.to(foam, {
+    opacity: 1, 
+    duration: 1,
+  });
+  tl.to(foam, {
+    y: 410, 
+    duration: 3,
+  });
+  tl.to(foam, {
+    opacity: 0, 
+    duration: 3
+  }, '-=2');
+  tl.to(dirt, {
+    opacity: 0, 
+    duration: 3
+  }, '-=3');
+  tl.to(dirt, {
+    display: 'none',
+  });
+  setDataCleaned(item);
+  checkKitchenDirt();
 });
 
 plateBacterium.addEventListener('click', () => {
   const tl = gsap.timeline();
-  tl.to(plateBacterium, {opacity: 0, duration: 0.5}).to(plateFoam, {opacity: 1, duration: 1}, "-=0.5").to(plateFoam, {opacity: 0, duration: 3});
-  tl.to(plateDirt, {opacity: 0, duration: 3}, "-=3").to(plateDirt, {display: 'none'});
-  ovenBacterium.setAttribute('data-dirt', false);
-  setDataCleaned(plate);
-  checkKitchen();
+  const foam = getFoam(plateBacterium);
+  const dirt = getDirt(plateBacterium);
+  const item = getItem(plateBacterium);
+
+  tl.to(plateBacterium, {
+    opacity: 0, 
+    duration: 0.5,
+  });
+  tl.to(foam, {
+    opacity: 1, 
+    duration: 1,
+  }, '-=0.5');
+  tl.to(foam, {
+    opacity: 0, 
+    duration: 3,
+  });
+  tl.to(dirt, {
+    opacity: 0, 
+    duration: 3,
+  }, '-=3');
+  tl.to(dirt, {
+    display: 'none',
+  });
+
+  setDataCleaned(item);
+  checkKitchenDirt();
 });
 
 dishesBacterium.addEventListener('click', () => {
   const tl = gsap.timeline();
-  tl.to(dishesBacterium, {opacity: 0, duration: 0.5}).to(dishesFoam, {opacity: 1, duration: 1}).to(dishesFoam, {opacity: 0, duration: 3}).to(dishesFoam2, {opacity: 1, duration: 1}, "-=2").to(dishesFoam2, {y: 310, duration: 2}, "-=1");
-  tl.to(dishesDirt, {opacity: 0, duration: 3}, "-=3").to(dishesDirt, {display: 'none'});
-  setDataCleaned(dishwasher);
-  checkKitchen();
-});
+  // TODO
+  const dishesFoam2 = document.querySelector('.dishes__foam-box');
+  const foam = getFoam(dishesBacterium);
+  const dirt = getDirt(dishesBacterium);
+  const item = getItem(dishesBacterium);
 
-switcherBacterium.addEventListener('click', () => {
-  const switcher = document.querySelector('.switcher');
-  const tl = gsap.timeline();
-  tl.to(switcherBacterium, {opacity: 0, duration: 0.5}).to(switcherFoam, {opacity: 1, duration: 0.5}).to(switcherFoam, {y: 310, duration: 2}).to(switcherFoam, {opacity: 0, duration: 2}, "-=1");
-  tl.to(switcherDirt, {opacity: 0, duration: 3}, "-=3").to(switcherDirt, {display: 'none'});
+  tl.to(dishesBacterium, {
+    opacity: 0, 
+    duration: 0.5,
+  });
+  tl.to(foam, {
+    opacity: 1, 
+    duration: 1,
+  });
+  tl.to(foam, {
+    opacity: 0, 
+    duration: 3,
+  });
+  tl.to(dishesFoam2, {
+    opacity: 1, 
+    duration: 1
+  },'-=2');
+  tl.to(dishesFoam2, {
+    y: 310, 
+    duration: 2
+  }, '-=1');
+  tl.to(dirt, {
+    opacity: 0, 
+    duration: 3
+  }, '-=3');
+  tl.to(dirt, {
+    display: 'none',
+  });
 
-  if (switcher.getAttribute('data-cleaned')) {
-    gsap.to(bathroomScreen, {opacity: 1, duration: 0.5, delay: 1});
-  }
+  setDataCleaned(item);
+  checkKitchenDirt();
 });
 
 sinkBacterium.addEventListener('click', () => {
   const tl = gsap.timeline();
-  tl.to(sinkBacterium
-  , {opacity: 0, duration: 0.5}).to(sinkFoam, {opacity: 1, duration: 1}, "-=0.4").to(sinkFoam, {opacity: 0, duration: 3});
-  tl.to(sinkDirt, {opacity: 0, duration: 3}, "-=3").to(sinkDirt, {display: 'none'});
+  const foam = getFoam(sinkBacterium);
+  const dirt = getDirt(sinkBacterium);
+  const item = getItem(sinkBacterium);
+
+  tl.to(sinkBacterium, {
+    opacity: 0, 
+    duration: 0.5,
+  });
+  tl.to(foam, {
+    opacity: 1, 
+    duration: 1,
+  }, '-=0.4');
+  tl.to(foam, {
+    opacity: 0, 
+    duration: 3,
+  });
+  tl.to(dirt, {
+    opacity: 0, 
+    duration: 3,
+  }, '-=3')
+  tl.to(dirt, {
+    display: 'none',
+  });
+
+  setDataCleaned(item);
+});
+
+switcherBacterium.addEventListener('click', () => {
+  const tl = gsap.timeline();
+  const foam = getFoam(switcherBacterium);
+  const dirt = getDirt(switcherBacterium);
+  const item = getItem(switcherBacterium);
+
+  tl.to(switcherBacterium, {
+    opacity: 0, 
+    duration: 0.5,
+  });
+  tl.to(foam, {
+    opacity: 1, 
+    duration: 0.5,
+  });
+  tl.to(foam, {
+    y: 310, 
+    duration: 2,
+  });
+  tl.to(foam, {
+    opacity: 0, 
+    duration: 2
+  }, '-=1');
+  tl.to(dirt, {
+    opacity: 0, 
+    duration: 3
+  }, '-=3');
+  tl.to(dirt, {
+    display: 'none',
+  });
+
+  setDataCleaned(item);
+
+  if (item.getAttribute('data-cleaned') === 'true') {
+    showElement(bathroomScreen, 0.5, 1);
+  }
 });
 
 doorBacterium.addEventListener('click', () => {
   const tl = gsap.timeline();
-  tl.to(doorBacterium, {opacity: 0, duration: 0.5}).to(doorFoam, {opacity: 1, duration: 1}, "-=0.4").to(doorFoam, {y: 210, duration: 2}).to(doorFoam, {opacity: 0, duration: 2}, "-=1");
-  tl.to(doorDirt, {opacity: 0, duration: 2}, "-=3").to(doorDirt, {display: 'none'});
+  const foam = getFoam(doorBacterium);
+  const dirt = getDirt(doorBacterium);
+  const item = getItem(doorBacterium);
+
+  tl.to(doorBacterium, {
+    opacity: 0, 
+    duration: 0.5,
+  });
+  tl.to(foam, {
+    opacity: 1, 
+    duration: 1,
+  }, '-=0.4');
+  tl.to(foam, {
+    y: 210, 
+    duration: 2,
+  });
+  tl.to(foam, {
+    opacity: 0, 
+    duration: 2,
+  }, '-=1');
+  tl.to(dirt, {
+    opacity: 0, 
+    duration: 2,
+  }, '-=3');
+  tl.to(dirt, {
+    display: 'none',
+  });
+
+  setDataCleaned(item);
 });
