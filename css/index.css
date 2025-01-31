@@ -24,15 +24,11 @@
   margin: 0;
 }
 
-body {
-  margin: 0;
+html {
+  font-size: 50px;
 }
 
 :root {
-  --canvas-width: 2503px;
-  --canvas-height: 810px;
-  --frame-width: 1080px;
-
   --color-white: #ffffff;
   --color-green-dark: #00402B;
   --color-green-light: #006822;
@@ -52,19 +48,16 @@ body {
 .container {
   margin: 0 auto;
   min-width: 320px;
+  font-family: 'Gotham Pro', sans-serif;
 }
 
 .banner {
   position: relative;
   width: 100%;
-  /* max-width: var(--frame-width);
-  min-width: 320px;
-  height: var(--canvas-height); */
   color: var(--color-white);
   margin: 0 auto;
   overflow: hidden;
   border-radius: 0.4rem;
-  font-family: 'Gotham Pro', sans-serif;
 }
 
 .title {
@@ -108,7 +101,9 @@ body {
 
 .start-screen {
   z-index: var(--layer-level-1);
-  background-image: linear-gradient(90deg, var(--color-green-light) 0%, transparent 100%), url("../img/start-screen-bg.jpg");
+  background-image: 
+    linear-gradient(90deg, var(--color-green-light) 0%, transparent 100%), 
+    url("../img/start-screen-bg.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 10% 0 12% 5%;
@@ -205,7 +200,7 @@ body {
 }
 
 .dirt--oven {
-  clip-path: polygon(15% 36%, 28% 37%, 28% 96%, 15% 96%);
+  clip-path: polygon(15% 36%, 29% 37%, 28% 96%, 15% 96%);
 }
 
 .dirt--dishes {
@@ -495,7 +490,7 @@ body {
 .switcher-wall {
   width: 16%;
   position: absolute;
-  left: 43.2%;
+  left: 42%;
   top: 0;
   opacity: 0;
 }
@@ -595,6 +590,7 @@ body {
 
   .finish-screen__title {
     font-size: 1.2rem;
+    max-width: 70%;
   }
 
   .finish-screen__title span {
@@ -611,12 +607,11 @@ body {
 }
 
 .finish-screen__product {
-  width: 35%;
+  width: 33%;
   height: auto;
   margin-top: -8%;
 }
 
- /* 100vh * 16 / 9 */
  @media (min-aspect-ratio: 16 / 9) {
 
   .container {
@@ -644,18 +639,10 @@ body {
 } 
 
 @media (max-aspect-ratio: 4 / 3) {
-  .container {
+  .container,
+  .banner {
     width: 100vw;
     height: 75vw;
-  }
-
-  .banner {
-    width: 100vw; 
-    height: 75vw;
-  }
-
-  .game {
-    background-size: contain;
   }
 
   .dirt {
