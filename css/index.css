@@ -40,101 +40,53 @@ body {
   --color-red-light: #D21A23;
   --color-red-dark: #97030a;
 
-  --border-radius-s: 20px;
-  --border-radius-m: 30px;
-
   --layer-level-1: 10;
   --layer-level-2: 9;
   --layer-level-3: 8;
-
-  --font-size-base: calc(34px + 8 * (100vw - 320px) / 760);
-}
-
-html {
-  font-size: 50px;
 }
 
 .hidden {
   display: none!important;
 }
 
+.container {
+  margin: 0 auto;
+  min-width: 320px;
+}
+
 .banner {
   position: relative;
   width: 100%;
-  max-width: var(--frame-width);
+  /* max-width: var(--frame-width);
   min-width: 320px;
-  height: var(--canvas-height);
+  height: var(--canvas-height); */
   color: var(--color-white);
   margin: 0 auto;
   overflow: hidden;
-  border-radius: var(--border-radius-m);
+  border-radius: 0.4rem;
   font-family: 'Gotham Pro', sans-serif;
 }
-
- /* 100vh * 16 / 9 */
- /* @media (min-aspect-ratio: 16/9) {
-  .container {
-    width: 177.77vh;
-    height: 100vh;
-    aspect-ratio: 16 / 9;
-  }
-
-  .banner {
-    width: 133.33vh;
-     height: 100vh;
-   }
-}  
-
-@media (max-aspect-ratio: 16/9) and (min-aspect-ratio: 4/3) {
-  .container {
-    width: 100vw;
-    height: 100vh;
-  }
-
-  .banner {
-    width: 133.33vh;
-    height: 100vh;
-  }
-} 
-
-@media (max-aspect-ratio: 4 / 3) {
-  .container {
-    width: 100vw;
-    height: 75vw;
-  }
-
-  .banner {
-    width: 100vw; 
-    height: 75vw;
-  }
-} 
-*/
 
 .title {
   text-transform: uppercase;
   font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 1.76px;
+  letter-spacing: 0.035rem;
   line-height: 1.1;
   margin: 0;
-  max-width: 646px;
 }
 
 .description {
   font-size: 0.88rem;
   font-weight: 500;
   line-height: 1.1;
-  max-width: 462px;
-  margin-top: 37px;
-  margin-bottom: 48px;
+  margin-top: 6%;
+  margin-bottom: 8%;
 }
 
 .button {
-  width: 85%;
   border-radius: 0.4rem;
   text-transform: uppercase;
-  height: 150px;
-  max-height: 220px;
   background-color: var(--color-red-light);
   appearance: none;
   border: none;
@@ -142,6 +94,7 @@ html {
   color: var(--color-white);
   font-weight: 700;
   cursor: pointer;
+  padding: 7% 8%;
 }
 
 .start-screen,
@@ -158,17 +111,17 @@ html {
   background-image: linear-gradient(90deg, var(--color-green-light) 0%, transparent 100%), url("../img/start-screen-bg.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  padding: 120px 0 130px 50px;
+  padding: 10% 0 12% 5%;
 }
 
-.start-screen__title {
-  margin-bottom: 38px;
+.start-screen__button {
+  min-width: 85%;
 }
 
 .start-screen__product {
   display: inline-block;
   background-color: var(--color-green-dark);
-  padding: 8px 12px 2px;
+  padding: 2% 2% 1%;
 }
 
 .start-screen__bacteriums {
@@ -182,34 +135,38 @@ html {
 }
 
 .start-screen__bacterium--purple {
-  width: 200px;
+  width: 48%;
   height: auto;
-  left: -38px;
-  top: 143px;
+  left: -5%;
+  top: 25%;
   transform: rotate(16deg);
 }
 
 .start-screen__bacterium--brown {
-  width: 194px;
+  width: 48%;
   height: auto;
-  right: 22px;
-  top: -20px;
+  right: 5%;
+  top: 0;
   transform: rotate(-20deg);
 }
 
 .start-screen__bacterium--salad-green {
-  width: 210px;
+  width: 93%;
   height: auto;
   transform: rotate(18deg);
 }
 
 .start-screen__bacterium-box {
   position: absolute;
-  right: 46px;
-  bottom: 69px;
-  width: 235px;
-  height: 184px;
+  right: 9%;
+  bottom: 12%;
+  width: 55%;
+  height: 33%;
   overflow: hidden;
+}
+
+.start-screen__text-block {
+  width: 60%;
 }
 
 .game {
@@ -220,19 +177,15 @@ html {
   right: 0;
   bottom: 0;
   display: flex;
-  min-width: var(--canvas-width);
-  width: 100%;
+  width: max-content;
   height: 100%;
-  background-image: url('../img/cleaned-room.webp');
-  background-size: cover;
   opacity: 0;
 }
 
 .game__screen {
   z-index: 3;
-  position: relative;
+  position: absolute;
   flex-shrink: 0;
-  width: var(--frame-size);
   height: 100%;
 }
 
@@ -243,6 +196,7 @@ html {
   right: 0;
   bottom: 0;
   background-image: url('../img/dirty-room.webp');
+  background-repeat: no-repeat;
   background-size: cover;
 }
 
@@ -277,20 +231,26 @@ html {
 .popup {
   display: flex;
   position: absolute;
-  top: 394px;
-  left: 60px;
+  align-items: center;
+  width: 80%;
+  height: 40%;
+  top: 50%;
+  left: 6%;
   transform: translateY(-50%);
 }
 
 .fridge {
-  width: 380px;
+  position: relative;
+  width: 40%;
   height: 100%;
 }
 
 .fridge__bacterium {
-  width: 230px;
-  height: 270px;
+  width: 27%;
+  margin-top: -3%;
+  height: auto;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .popup__description {
@@ -298,9 +258,9 @@ html {
   align-items: center;
   gap: 1.08rem;
   position: absolute;
-  left: 190px;
-  width: 708px;
-  height: 204px;
+  left: 23%;
+  width: 90%;
+  height: 65%;
   background-color: var(--color-green-fade);
   border-radius: 0.6rem;
   backdrop-filter: blur(5px);
@@ -309,6 +269,7 @@ html {
   font-weight: 400;
   z-index: -1;
   opacity: 0;
+  flex-shrink: 0;
 }
 
 .popup__icon {
@@ -317,8 +278,9 @@ html {
   height: 0; 
   border-color: transparent;
   border-style: solid;
-  border-width: 42px;
+  border-width: 0.84rem;
   border-right-color: var(--color-white);
+  flex-shrink: 0;
 }
 
 .foam {
@@ -328,201 +290,247 @@ html {
   pointer-events: none;
 }
 
+.onboarding {
+  width: 42%;
+  height: 100%;
+}
+
 .fridge__foam {
-  left: -36px;
-  top: 14px;
-  width: 470px; 
-  height: 544px;
+  left: -5%;
+  top: 5%;
+  width: 100%; 
+  height: 60%;
   background-image: url("../img/foam-puddle-m.png");
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .oven {
-  width: 338px; 
-  height: 390px;
+  width: 48%;
+  height: 64%;
   position: absolute;
   left: 0;
-  bottom: 40px;
+  bottom: 0;
 }
 
 .oven__foam {
   background-image: url("../img/foam-puddle-m.png");
   background-repeat: no-repeat;
   background-size: contain;
-  width: 338px; 
-  height: 390px;
+  width: 100%;
+  height: 100%;
   left: 0;
-  top: -10%;
+  top: 0;
 }
 
 .plate {
   position: absolute;
-  width: 500px;
-  height: 300px;
+  width: 71.5%;
+  height: 38%;
+  left: 0;
+  top: 0;
 }
 
 .plate__foam  {
-  width: 405px;
-  height: 405px;
+  width: 90%;
+  height: 80%;
   background-image: url("../img/foam-top-m.png");
   background-repeat: no-repeat;
   background-size: contain;
   left: 11%;
-  top: 10%;
+  top: 21%;
 }
 
 .dishes__foam {
   background-image: url("../img/foam-top-s.png");
   background-repeat: no-repeat;
   background-size: contain;
-  top: 177px;
-  left: 368px;
-  width: 500px;
-  height: 200px;
+  top: 24%;
+  left: 0;
+  width: 100%;
+  height: 15%;
 }
 
-.dishes__foam--puddle {
+.dishes__foam-puddle {
   background-image: url("../img/foam-puddle-m.png");
   background-repeat: no-repeat;
   background-size: contain;
-  left: 480px;
-  width: 390px;
-  height: 500px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 65%;
+  transform: translateY(-57%);
+}
+
+.switcher {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .switcher__foam {
   background-image: url("../img/foam-puddle-s.png");
   background-repeat: no-repeat;
   background-size: contain;
-  top: 100px;
-  left: 120px;
-  width: 248px;
-  height: 248px;
+  top: 18%;
+  left: 49%;
+  width: 50%;
+  height: 28%;
 }
 
 .sink__foam {
   background-image: url("../img/foam-top-m.png");
   background-repeat: no-repeat;
   background-size: contain;
-  left: -32px;
-  top: 33px;
-  width: 328px;
-  height: 200px;
+  left: 2%;
+  top: 17%;
+  width: 100%;
+  height: 20%;
 }
 
 .door__foam {
   background-image: url("../img/foam-puddle-m.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  width: 200px;
-  height: 544px;
-  left: 310px;
+  width: 75%;
+  height: 60%;
+  top: 14%;
+  left: 43%;
 }
 
 .kitchen {
-  width: 700px;
+  width: 28%;
   height: 100%;
   position: absolute;
   top: 0;
-  left: 380px;
-  opacity: 0;
+  left: 15.2%;
 }
 
 .plate__bacterium {
-  width: 180px;
+  position: absolute;
+  width: 34%;
   height: auto;
+  left: 29%;
+  top: 9%;
   cursor: pointer;
+  opacity: 0;
+}
+
+.dishes {
+  width: 56.2%;
+  height: 100%;
+  position: absolute;
+  left: 48%;
 }
 
 .dishes__bacterium-box {
-  width: 217px;
-  height: 153px;
+  width: 54%;
+  height: 15.9%;
   position: absolute;
-  right: -6px;
-  top: 135px;
+  left: 39%;
+  top: 19.6%;
   overflow: hidden;
   cursor: pointer;
+  opacity: 0;
+}
+
+.dishes__bacterium {
+  width: 100%;
+  height: auto;
 }
 
 .dishes__foam-box {
   position: absolute;
-  width: 217px;
-  height: 153px;
+  top: 37%;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-}
-
-.plate__bacteruim {
-  position: absolute;
-  left: 192px;
-  top: 33px;
-  cursor: pointer;
 }
 
 .oven__bacterium {
   position: absolute;
-  bottom: 0;
-  top: 17%;
+  top: 18%;
   left: -24%;
+  width: 60%;
+  height: auto;
   cursor: pointer;
+  opacity: 0;
 }
 
 .switcher__bacterium {
   position: absolute;
-  top: 230px;
+  top: 33%;
+  left: 18%;
+  width: 60%;
+  height: auto;
   cursor: pointer;
 }
 
 .sink__bacterium-box {
   position: absolute;
   overflow: hidden;
-  height: 170px;
-  top: 83px;
+  width: 65%;
+  height: 20%;
+  top: 11%;
+  left: 26%;
   cursor: pointer;
+  opacity: 0;
+}
+
+.sink__bacterium {
+  width: 100%;
+  height: auto;
 }
 
 .door__bacterium {
   position: absolute;
-  bottom: 76px;
-  right: 20px;
+  bottom: 13%;
+  left: -1%;
+  width: 90%;
+  height: auto;
   cursor: pointer;
+  opacity: 0;
 }
 
 .switcher-wall {
-  width: 400px;
+  width: 16%;
   position: absolute;
-  left: 1080px;
+  left: 43.2%;
   top: 0;
   opacity: 0;
 }
 
 .bathroom {
   position: absolute;
-  left: 1480px;
-  width: 580px;
+  left: 59%;
+  width: 21.5%;
   height: 100%;
-  opacity: 0;
+  display: flex;
 }
 
 .sink {
-  width: 300px;
+  position: relative;
+  width: 50%;
   height: 100%;
+  flex-shrink: 0;
 }
 
 .door {
-  width: 280px;
+  position: relative;
+  width: 50%;
   height: 100%;
+  flex-shrink: 0;
 }
 
 .timer {
   position: absolute;
   left: 3%;
-  bottom: 20px;
+  bottom: 5%;
   z-index: 100;
   width: 94%;
-  height: 36px;
+  height: 4.25%;
   border-radius: 0.6rem;
-  border: 3px solid var(--color-white);
+  border: 0.04rem solid var(--color-white);
   opacity: 0;
   pointer-events: none;
 
@@ -532,11 +540,11 @@ html {
     background-image: url('../img/product.png');
     background-repeat: no-repeat;
     background-size: contain;
-    width: 153px;
-    height: 294px;
+    width: 14%;
+    height: 1000%;
     position: absolute;
     right: 0;
-    top: -256px;
+    bottom: 0;
   }
 }
 
@@ -553,9 +561,7 @@ html {
   z-index: var(--layer-level-3);
   align-items: center;
   justify-content: center;
-  padding: 60px 40px 70px;
-  width: var(--frame-size);
-  height: var(--canvas-height);
+  padding: 17% 5% 6%;
   background-image: url('../img/finish-bg-2x.webp');
   background-size: cover;
   opacity: 0;
@@ -567,6 +573,18 @@ html {
 
 .finish-screen__title {
   margin: 0;
+}
+
+.finish-screen__description {
+  margin-top: 0;
+  margin-bottom: 5%;
+}
+
+.finish-screen__loose-text {
+  display: inline-block;
+  margin-bottom: 1.5%;
+  max-width: 60%;
+  line-height: 1.2;
 }
 
 .finish-screen__text--win {
@@ -582,4 +600,65 @@ html {
   .finish-screen__title span {
     font-size: 2rem;
   }
+
+  .finish-screen__description {
+    margin-top: 2%;
+  }
 }
+
+.finish-screen__text {
+  width: 68%;
+}
+
+.finish-screen__product {
+  width: 35%;
+  height: auto;
+  margin-top: -8%;
+}
+
+ /* 100vh * 16 / 9 */
+ @media (min-aspect-ratio: 16 / 9) {
+
+  .container {
+    width: 177.77vh;
+    height: 100vh;
+    aspect-ratio: 16 / 9;
+  }
+
+  .banner {
+    width: 133.33vh;
+    height: 100vh;
+  }
+}  
+
+@media (max-aspect-ratio: 16 / 9) and (min-aspect-ratio: 4 / 3) {
+  .container {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .banner {
+    width: 133.33vh;
+    height: 100vh;
+  }
+} 
+
+@media (max-aspect-ratio: 4 / 3) {
+  .container {
+    width: 100vw;
+    height: 75vw;
+  }
+
+  .banner {
+    width: 100vw; 
+    height: 75vw;
+  }
+
+  .game {
+    background-size: contain;
+  }
+
+  .dirt {
+    background-size: contain;
+  }
+} 

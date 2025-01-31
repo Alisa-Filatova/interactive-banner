@@ -12,7 +12,7 @@
       <div class="banner">
         <!-- START SCREEN -->
         <div class="start-screen">
-          <div>
+          <div class="start-screen__text-block">
             <h2 class="title start-screen__title">
               Сколько грязи и&nbsp;бактерий&nbsp;сможет удалить&nbsp;новая 
               <span class="start-screen__product">крем-пена?</span>
@@ -57,6 +57,12 @@
         </div>
         <!-- GAME -->
         <div class="game">
+          <img 
+            src="img/cleaned-room.webp" 
+            height="100%" 
+            width="auto" 
+            alt=""
+          />
           <!-- Dirt -->
           <div class="dirt dirt--fridge" data-item="fridge"></div>
           <div class="dirt dirt--oven" data-item="oven"></div>
@@ -72,21 +78,22 @@
               data-cleaned="false"
             >
               <div class="foam fridge__foam" data-item="fridge"></div>
-              <div class="popup">
-                <img 
-                  class="bacterium fridge__bacterium" 
-                  src="img/bacterium-salad-green.png" 
-                  alt="" 
-                  width="230"
-                  height="270"
-                  draggable="false"
-                  data-item="fridge"
-                > 
-                <p class="popup__description">
-                  <span class="popup__icon"></span>
-                  <span>Нажимай на бактерии, чтобы&nbsp;очистить&nbsp;дом</span>
-                </p>
-              </div>
+            </div>
+
+            <div class="popup">
+              <img 
+                class="bacterium fridge__bacterium" 
+                src="img/bacterium-salad-green.png" 
+                alt="" 
+                width="230"
+                height="270"
+                draggable="false"
+                data-item="fridge"
+              > 
+              <p class="popup__description">
+                <span class="popup__icon"></span>
+                <span>Нажимай на бактерии, чтобы&nbsp;очистить&nbsp;дом</span>
+              </p>
             </div>
           </div>
           <!-- SCREEN 2 KITCHEN -->
@@ -127,16 +134,15 @@
             >
               <div class="foam dishes__foam" data-item="dishes"></div>
               <div class="dishes__foam-box">
-                <div class="foam dishes__foam--puddle data-item="dishes"></div>
+                <div class="foam dishes__foam-puddle" data-item="dishes"></div>
               </div>
-              <div class="dishes__bacterium-box">
+              <div class="dishes__bacterium-box" data-item="dishes">
                 <img 
                   class="bacterium dishes__bacterium" 
                   src="img/bacterium-blue.png" 
                   alt="" 
                   width="218" 
                   draggable="false"
-                  data-item="dishes"
                 >
               </div>
             </div>
@@ -173,7 +179,6 @@
                   alt="" 
                   width="210" 
                   draggable="false"
-                  data-item="sink"
                 >
               </div>
             </div>
@@ -202,7 +207,7 @@
         <div class="finish-screen">
           <div class="finish-screen__text">
             <span class="finish-screen__loose-text">
-              Для удаления всех пятен
+              Для&nbsp;удаления всех&nbsp;пятен
             </span>
             <h2 class="title finish-screen__title">
               Крем-пена <span>100% чистота</span>

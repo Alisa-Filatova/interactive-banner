@@ -1,21 +1,21 @@
-const container = document.querySelector(".container");
-const content = document.querySelector(".banner");
+// const container = document.querySelector('.container');
+const banner = document.querySelector('.banner');
+const root = document.querySelector('html');
 
-// const resizeContent = () => {
-//   // info.style.fontSize = (content.offsetHeight * 50 ) / 810 + "px";
-//   game.style.width = 
-//   content.style.width = content.offsetWidth + "px";
-//   content.style.height = content.offsetHeight + "px";
-// }
+const resizeContent = () => {
+  root.style.fontSize = (banner.offsetHeight * 50) / 810 + "px";
+  // game.style.width = 
+  // content.style.width = content.offsetWidth + "px";
+  // content.style.height = content.offsetHeight + "px";
+}
 
-// // resizeContent();
+resizeContent();
 
 // let timeoutId;
 
-// window.addEventListener('resize', () => {
-//   clearTimeout(timeoutId);
-//   timeoutId = setTimeout(resizeContent, 100);
-// });
+window.addEventListener('resize', () => {
+  resizeContent();
+});
 
 
 const setDataCleaned = (item) => {
@@ -86,24 +86,30 @@ const getItem = (bacterium) => {
 const jumpingBacteriumsTween = () => {
   const bacteriumTimeline = gsap.timeline();
 
-  bacteriumTimeline.to('.start-screen__bacterium', {
-    stagger: 0.25,
-    y: 30,
-    repeat: -1,
-    yoyo: true,
-    duration: 2,
-    ease: 'bounce.out',
-  });
-  
-  bacteriumTimeline.to('.start-screen__bacterium--brown', { 
-    y: 25,
-    duration: 1,
-  }, '+=1');
-  
+
   bacteriumTimeline.to('.start-screen__bacterium--salad-green', { 
     y: 20,
     duration: 1.5,
-  }, '+=1.5');
+    repeat: -1,
+    yoyo: true,
+    ease: 'bounce.out',
+  });
+  
+  bacteriumTimeline.to('.start-screen__bacterium--purple', { 
+    y: 30,
+    duration: 2,
+    repeat: -1,
+    yoyo: true,
+    ease: 'bounce.out',
+  }, '-=0.3');
+
+  bacteriumTimeline.to('.start-screen__bacterium--brown', { 
+    y: 25,
+    duration: 1,
+    repeat: -1,
+    yoyo: true,
+    ease: 'bounce.out',
+  }, '-=0.3');
 };
 
 const initStartScreenAnim = () => {
@@ -117,8 +123,8 @@ const initStartScreenAnim = () => {
 
 initStartScreenAnim();
 
-const canvasWidth = 2503;
-const frameWidth = 1080;
+// const canvasWidth = 2503;
+// const frameWidth = 1080;
 const gameTime = 15;
 
 const startScreen = document.querySelector('.start-screen');
@@ -131,9 +137,9 @@ const finishScreen = document.querySelector('.finish-screen');
 const fridgeBacterium = document.querySelector('.fridge__bacterium');
 const ovenBacterium = document.querySelector('.oven__bacterium');
 const plateBacterium = document.querySelector('.plate__bacterium');
-const dishesBacterium = document.querySelector('.dishes__bacterium');
+const dishesBacterium = document.querySelector('.dishes__bacterium-box');
 const switcherBacterium = document.querySelector('.switcher__bacterium');
-const sinkBacterium = document.querySelector('.sink__bacterium');
+const sinkBacterium = document.querySelector('.sink__bacterium-box');
 const doorBacterium = document.querySelector('.door__bacterium');
 
 const showOnboardingPopup = () => {
@@ -216,10 +222,22 @@ const finishGame = () => {
   showFinishScreen();
 };
 
+const showKitchenBacteriums = () => {
+  showElement(ovenBacterium);
+  showElement(plateBacterium, 1.2, 0.2);
+  showElement(dishesBacterium, 1, 0.3);
+}
+
 const startGame = () => {
+  const getCanvasSize = game.getBoundingClientRect();
+  const canvasWidth = getCanvasSize.width;
+
+  var getFrameSize = banner.getBoundingClientRect();
+  const frameWidth = getFrameSize.width;
+  
   const canvasEndPositionX = -(canvasWidth - frameWidth);
 
-  showElement(kitchenScreen);
+  showKitchenBacteriums();
 
   gsap.to(game, {
     x: canvasEndPositionX, 
@@ -236,11 +254,12 @@ const startGame = () => {
 
 const startOnboarding = () => {
   const timeline = gsap.timeline();
+  const popup = document.querySelector('.popup');
   const foam = getFoam(fridgeBacterium);
   const dirt = getDirt(fridgeBacterium);
   const item = getItem(fridgeBacterium);
 
-  timeline.to('.popup', {
+  timeline.to(popup, {
     opacity: 0, 
     duration: 0.5,
   });
@@ -360,8 +379,7 @@ plateBacterium.addEventListener('click', () => {
 
 dishesBacterium.addEventListener('click', () => {
   const timeline = gsap.timeline();
-  // TODO
-  const dishesFoam2 = document.querySelector('.dishes__foam-box');
+  const dishesFoamPuddle = document.querySelector('.dishes__foam-puddle');
   const foam = getFoam(dishesBacterium);
   const dirt = getDirt(dishesBacterium);
   const item = getItem(dishesBacterium);
@@ -373,23 +391,27 @@ dishesBacterium.addEventListener('click', () => {
   timeline.to(foam, {
     opacity: 1, 
     duration: 1,
-  });
+  },'-=0.5');
+  timeline.to(dishesFoamPuddle, {
+    opacity: 1, 
+    duration: 1,
+  }, '-=1.5');
   timeline.to(foam, {
     opacity: 0, 
     duration: 3,
   });
-  timeline.to(dishesFoam2, {
-    opacity: 1, 
-    duration: 1
-  },'-=2');
-  timeline.to(dishesFoam2, {
-    y: 310, 
-    duration: 2
-  }, '-=1');
+  timeline.to(dishesFoamPuddle, {
+    y: "90%", 
+    duration: 3,
+  }, '-=2');
+  timeline.to(dishesFoamPuddle, {
+    opacity: 0, 
+    duration: 2,
+  }, '-=3');
   timeline.to(dirt, {
     opacity: 0, 
-    duration: 3
-  }, '-=3');
+    duration: 3,
+  }, '-=2');
   timeline.to(dirt, {
     display: 'none',
   });
@@ -427,6 +449,11 @@ sinkBacterium.addEventListener('click', () => {
   setDataCleaned(item);
 });
 
+const showBathroomBacteriums = () => {
+  showElement(sinkBacterium, 0.5, 1);
+  showElement(doorBacterium, 0.5, 1.2);
+}
+
 switcherBacterium.addEventListener('click', () => {
   const timeline = gsap.timeline();
   const foam = getFoam(switcherBacterium);
@@ -460,7 +487,7 @@ switcherBacterium.addEventListener('click', () => {
   setDataCleaned(item);
 
   if (item.getAttribute('data-cleaned') === 'true') {
-    showElement(bathroomScreen, 0.5, 1);
+    showBathroomBacteriums();
   }
 });
 
