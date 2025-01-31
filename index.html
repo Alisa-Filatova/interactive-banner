@@ -2,222 +2,226 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8">
-    <title>Тестовое задание</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Алиса Филатова">
+    <title>Тестовое задание - Баннер</title>
     <link href="css/index.css" rel="stylesheet">
   </head>
   <body>
-    <div class="banner">
-      <!-- START SCREEN -->
-      <div class="start-screen">
-        <div>
-          <h2 class="title start-screen__title">
-            Сколько грязи и&nbsp;бактерий&nbsp;сможет удалить&nbsp;новая 
-            <span class="start-screen__product">крем-пена?</span>
-          </h2>
-          <p class="description start-screen__description">
-            Сыграй в игру, чтобы очистить дом
-          </p>
-          <button 
-            class="button start-screen__button" 
-            type="button"
-          >
-            Играть
-          </button>
-        </div>
-        <div class="start-screen__bacteriums">
-          <img 
-            class="start-screen__bacterium start-screen__bacterium--purple" 
-            src="img/bacterium-purple.png" 
-            alt="" 
-            width="197" 
-            height="197"
-            draggable="false"
-          >
-          <img 
-            class="start-screen__bacterium start-screen__bacterium--brown" 
-            src="img/bacterium-brown.png" 
-            alt="" 
-            width="249" 
-            height="249"
-            draggable="false"
-          >
-          <div class="start-screen__bacterium-box">
-            <img 
-              class="start-screen__bacterium start-screen__bacterium--salad-green" 
-              src="img/bacterium-salad-green.png" 
-              alt="" 
-              width="235" 
-              draggable="false"
+    <div class="container">
+      <div class="banner">
+        <!-- START SCREEN -->
+        <div class="start-screen">
+          <div>
+            <h2 class="title start-screen__title">
+              Сколько грязи и&nbsp;бактерий&nbsp;сможет удалить&nbsp;новая 
+              <span class="start-screen__product">крем-пена?</span>
+            </h2>
+            <p class="description start-screen__description">
+              Сыграй в игру, чтобы&nbsp;очистить&nbsp;дом
+            </p>
+            <button 
+              class="button start-screen__button" 
+              type="button"
             >
+              Играть
+            </button>
           </div>
-        </div>
-      </div>
-      <!-- GAME -->
-      <div class="game">
-        <!-- Dirt -->
-        <div class="dirt dirt--fridge" data-item="fridge"></div>
-        <div class="dirt dirt--oven" data-item="oven"></div>
-        <div class="dirt dirt--plate" data-item="plate"></div>
-        <div class="dirt dirt--dishes" data-item="dishes"></div>
-        <div class="dirt dirt--switcher" data-item="switcher"></div>
-        <div class="dirt dirt--sink" data-item="sink"></div>
-        <div class="dirt dirt--door" data-item="door"></div>
-        <!-- SCREEN 1 START -->
-        <div class="game__screen onboarding">
-          <div 
-            class="fridge"
-            data-cleaned="false"
-          >
-            <div class="foam fridge__foam" data-item="fridge"></div>
-            <div class="popup">
-              <img 
-                class="bacterium popup__bacterium" 
-                src="img/bacterium-salad-green.png" 
-                alt="" 
-                width="230"
-                height="270"
-                draggable="false"
-                data-item="fridge"
-              > 
-              <p class="popup__description">
-                <span class="popup__icon"></span>
-                <span>Нажимай на бактерии, чтобы&nbsp;очистить&nbsp;дом</span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- SCREEN 2 KITCHEN -->
-        <div class="game__screen kitchen">
-          <div 
-            class="kitchen__item oven"
-            data-cleaned="false"
-          >
-            <div class="foam oven__foam" data-item="oven"></div>
-            <img
-              class="bacterium oven__bacterium" 
+          <div class="start-screen__bacteriums">
+            <img 
+              class="start-screen__bacterium start-screen__bacterium--purple" 
               src="img/bacterium-purple.png" 
               alt="" 
-              width="209" 
-              height="209"
+              width="197" 
+              height="197"
               draggable="false"
-              data-item="oven"
             >
-          </div>
-          <div 
-            class="kitchen__item plate"
-            data-cleaned="false"
-          >
-            <div class="foam plate__foam" data-item="plate"></div>
             <img 
-              class="bacterium plate__bacterium" 
+              class="start-screen__bacterium start-screen__bacterium--brown" 
               src="img/bacterium-brown.png" 
               alt="" 
-              width="203" 
-              height="204"
+              width="249" 
+              height="249"
               draggable="false"
-              data-item="plate"
             >
-          </div>
-          <div 
-            class="kitchen__item dishes"
-            data-cleaned="false"
-          >
-            <div class="foam dishes__foam" data-item="dishes"></div>
-            <div class="dishes__foam-box">
-              <div class="foam dishes__foam--puddle data-item="dishes"></div>
-            </div>
-            <div class="dishes__bacterium-box">
+            <div class="start-screen__bacterium-box">
               <img 
-                class="bacterium dishes__bacterium" 
-                src="img/bacterium-blue.png" 
-                alt="" 
-                width="218" 
-                draggable="false"
-                data-item="dishes"
-              >
-            </div>
-          </div>
-        </div>
-        <!-- SCREEN 3 SWITCHER -->
-        <div class="game__screen switcher-wall">
-          <div 
-            class="switcher"
-            data-cleaned="false"
-          >
-            <div class="foam switcher__foam" data-item="switcher"></div>
-            <img 
-              class="bacterium switcher__bacterium" 
-              src="img/bacterium-green.png" 
-              alt="" 
-              width="263" 
-              height="262"
-              draggable="false"
-              data-item="switcher"
-            >
-          </div>
-        </div>
-        <!-- SCREEN 4 BATHROOM -->
-        <div class="game__screen bathroom">
-          <div 
-            class="sink"
-            data-cleaned="false"
-          >
-            <div class="foam sink__foam" data-item="sink"></div>
-            <div class="sink__bacterium-box" data-item="sink">
-              <img 
-                class="bacterium sink__bacterium" 
+                class="start-screen__bacterium start-screen__bacterium--salad-green" 
                 src="img/bacterium-salad-green.png" 
                 alt="" 
-                width="210" 
+                width="235" 
                 draggable="false"
-                data-item="sink"
               >
             </div>
           </div>
-          <div 
-            class="door"
-            data-cleaned="false"
-          >
-            <div class="foam door__foam" data-item="door"></div>
-            <img 
-              class="bacterium door__bacterium" 
-              src="img/bacterium-orange.png" 
-              alt="" 
-              width="283" 
-              height="283"
-              draggable="false"
-              data-item="door"
+        </div>
+        <!-- GAME -->
+        <div class="game">
+          <!-- Dirt -->
+          <div class="dirt dirt--fridge" data-item="fridge"></div>
+          <div class="dirt dirt--oven" data-item="oven"></div>
+          <div class="dirt dirt--plate" data-item="plate"></div>
+          <div class="dirt dirt--dishes" data-item="dishes"></div>
+          <div class="dirt dirt--switcher" data-item="switcher"></div>
+          <div class="dirt dirt--sink" data-item="sink"></div>
+          <div class="dirt dirt--door" data-item="door"></div>
+          <!-- SCREEN 1 START -->
+          <div class="game__screen onboarding">
+            <div 
+              class="fridge"
+              data-cleaned="false"
             >
+              <div class="foam fridge__foam" data-item="fridge"></div>
+              <div class="popup">
+                <img 
+                  class="bacterium fridge__bacterium" 
+                  src="img/bacterium-salad-green.png" 
+                  alt="" 
+                  width="230"
+                  height="270"
+                  draggable="false"
+                  data-item="fridge"
+                > 
+                <p class="popup__description">
+                  <span class="popup__icon"></span>
+                  <span>Нажимай на бактерии, чтобы&nbsp;очистить&nbsp;дом</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- SCREEN 2 KITCHEN -->
+          <div class="game__screen kitchen">
+            <div 
+              class="kitchen__item oven"
+              data-cleaned="false"
+            >
+              <div class="foam oven__foam" data-item="oven"></div>
+              <img
+                class="bacterium oven__bacterium" 
+                src="img/bacterium-purple.png" 
+                alt="" 
+                width="209" 
+                height="209"
+                draggable="false"
+                data-item="oven"
+              >
+            </div>
+            <div 
+              class="kitchen__item plate"
+              data-cleaned="false"
+            >
+              <div class="foam plate__foam" data-item="plate"></div>
+              <img 
+                class="bacterium plate__bacterium" 
+                src="img/bacterium-brown.png" 
+                alt="" 
+                width="203" 
+                height="204"
+                draggable="false"
+                data-item="plate"
+              >
+            </div>
+            <div 
+              class="kitchen__item dishes"
+              data-cleaned="false"
+            >
+              <div class="foam dishes__foam" data-item="dishes"></div>
+              <div class="dishes__foam-box">
+                <div class="foam dishes__foam--puddle data-item="dishes"></div>
+              </div>
+              <div class="dishes__bacterium-box">
+                <img 
+                  class="bacterium dishes__bacterium" 
+                  src="img/bacterium-blue.png" 
+                  alt="" 
+                  width="218" 
+                  draggable="false"
+                  data-item="dishes"
+                >
+              </div>
+            </div>
+          </div>
+          <!-- SCREEN 3 SWITCHER -->
+          <div class="game__screen switcher-wall">
+            <div 
+              class="switcher"
+              data-cleaned="false"
+            >
+              <div class="foam switcher__foam" data-item="switcher"></div>
+              <img 
+                class="bacterium switcher__bacterium" 
+                src="img/bacterium-green.png" 
+                alt="" 
+                width="263" 
+                height="262"
+                draggable="false"
+                data-item="switcher"
+              >
+            </div>
+          </div>
+          <!-- SCREEN 4 BATHROOM -->
+          <div class="game__screen bathroom">
+            <div 
+              class="sink"
+              data-cleaned="false"
+            >
+              <div class="foam sink__foam" data-item="sink"></div>
+              <div class="sink__bacterium-box" data-item="sink">
+                <img 
+                  class="bacterium sink__bacterium" 
+                  src="img/bacterium-salad-green.png" 
+                  alt="" 
+                  width="210" 
+                  draggable="false"
+                  data-item="sink"
+                >
+              </div>
+            </div>
+            <div 
+              class="door"
+              data-cleaned="false"
+            >
+              <div class="foam door__foam" data-item="door"></div>
+              <img 
+                class="bacterium door__bacterium" 
+                src="img/bacterium-orange.png" 
+                alt="" 
+                width="283" 
+                height="283"
+                draggable="false"
+                data-item="door"
+              >
+            </div>
           </div>
         </div>
-      </div>
-       <!-- TIMER -->
-      <div class="timer">
-        <div class="timer__bar"></div>
-      </div>
-      <!-- FINAL SCREEN -->
-      <div class="finish-screen">
-        <div class="finish-screen__text">
-          <span class="finish-screen__loose-text">
-            Для удаления всех пятен
-          </span>
-          <h2 class="title finish-screen__title">
-            Крем-пена <span>100% чистота</span>
-          </h2>
-          <p class="description finish-screen__description">
-            От кухни до ванной
-          </p>
-          <button class="button finish-screen__button">
-            Попробовать
-          </button>
+        <!-- TIMER -->
+        <div class="timer">
+          <div class="timer__bar"></div>
         </div>
-        <img 
-          class="finish-screen__product"
-          src="img/product.png" 
-          draggable="false" 
-          alt="Крем-пена 100% Чистота" 
-          width="320"
-        >
+        <!-- FINAL SCREEN -->
+        <div class="finish-screen">
+          <div class="finish-screen__text">
+            <span class="finish-screen__loose-text">
+              Для удаления всех пятен
+            </span>
+            <h2 class="title finish-screen__title">
+              Крем-пена <span>100% чистота</span>
+            </h2>
+            <p class="description finish-screen__description">
+              От кухни до ванной
+            </p>
+            <button class="button finish-screen__button" type="button">
+              Попробовать
+            </button>
+          </div>
+          <img 
+            class="finish-screen__product"
+            src="img/product.png" 
+            draggable="false" 
+            alt="Крем-пена 100% Чистота" 
+            width="320"
+          >
+        </div>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>

@@ -20,6 +20,8 @@
 
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
@@ -44,6 +46,12 @@ body {
   --layer-level-1: 10;
   --layer-level-2: 9;
   --layer-level-3: 8;
+
+  --font-size-base: calc(34px + 8 * (100vw - 320px) / 760);
+}
+
+html {
+  font-size: 50px;
 }
 
 .hidden {
@@ -63,9 +71,48 @@ body {
   font-family: 'Gotham Pro', sans-serif;
 }
 
+ /* 100vh * 16 / 9 */
+ /* @media (min-aspect-ratio: 16/9) {
+  .container {
+    width: 177.77vh;
+    height: 100vh;
+    aspect-ratio: 16 / 9;
+  }
+
+  .banner {
+    width: 133.33vh;
+     height: 100vh;
+   }
+}  
+
+@media (max-aspect-ratio: 16/9) and (min-aspect-ratio: 4/3) {
+  .container {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .banner {
+    width: 133.33vh;
+    height: 100vh;
+  }
+} 
+
+@media (max-aspect-ratio: 4 / 3) {
+  .container {
+    width: 100vw;
+    height: 75vw;
+  }
+
+  .banner {
+    width: 100vw; 
+    height: 75vw;
+  }
+} 
+*/
+
 .title {
   text-transform: uppercase;
-  font-size: 51px;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 1.76px;
   line-height: 1.1;
@@ -74,22 +121,24 @@ body {
 }
 
 .description {
-  font-size: 44px;
+  font-size: 0.88rem;
   font-weight: 500;
   line-height: 1.1;
   max-width: 462px;
   margin-top: 37px;
+  margin-bottom: 48px;
 }
 
 .button {
-  width: 535px;
-  border-radius: 20px;
+  width: 85%;
+  border-radius: 0.4rem;
   text-transform: uppercase;
   height: 150px;
+  max-height: 220px;
   background-color: var(--color-red-light);
   appearance: none;
   border: none;
-  font-size: 55px;
+  font-size: 1.1rem;
   color: var(--color-white);
   font-weight: 700;
   cursor: pointer;
@@ -107,8 +156,13 @@ body {
 .start-screen {
   z-index: var(--layer-level-1);
   background-image: linear-gradient(90deg, var(--color-green-light) 0%, transparent 100%), url("../img/start-screen-bg.jpg");
-  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   padding: 120px 0 130px 50px;
+}
+
+.start-screen__title {
+  margin-bottom: 38px;
 }
 
 .start-screen__product {
@@ -166,7 +220,8 @@ body {
   right: 0;
   bottom: 0;
   display: flex;
-  width: var(--canvas-width);
+  min-width: var(--canvas-width);
+  width: 100%;
   height: 100%;
   background-image: url('../img/cleaned-room.webp');
   background-size: cover;
@@ -227,7 +282,12 @@ body {
   transform: translateY(-50%);
 }
 
-.popup__bacterium {
+.fridge {
+  width: 380px;
+  height: 100%;
+}
+
+.fridge__bacterium {
   width: 230px;
   height: 270px;
   cursor: pointer;
@@ -236,15 +296,15 @@ body {
 .popup__description {
   display: inline-flex;
   align-items: center;
-  gap: 54px;
+  gap: 1.08rem;
   position: absolute;
   left: 190px;
   width: 708px;
   height: 204px;
   background-color: var(--color-green-fade);
-  border-radius: 30px;
+  border-radius: 0.6rem;
   backdrop-filter: blur(5px);
-  font-size: 44px;
+  font-size: 0.88rem;
   line-height: 1.2;
   font-weight: 400;
   z-index: -1;
@@ -282,8 +342,8 @@ body {
   width: 338px; 
   height: 390px;
   position: absolute;
-  left: 8%;
-  top: 42%;
+  left: 0;
+  bottom: 40px;
 }
 
 .oven__foam {
@@ -292,10 +352,14 @@ body {
   background-size: contain;
   width: 338px; 
   height: 390px;
-  left: 8%;
-  top: 42%;
-  /* left: 47px;
-  top: 268px; */
+  left: 0;
+  top: -10%;
+}
+
+.plate {
+  position: absolute;
+  width: 500px;
+  height: 300px;
 }
 
 .plate__foam  {
@@ -304,8 +368,8 @@ body {
   background-image: url("../img/foam-top-m.png");
   background-repeat: no-repeat;
   background-size: contain;
-  left: 20%;
-  top: 14%;
+  left: 11%;
+  top: 10%;
 }
 
 .dishes__foam {
@@ -357,11 +421,11 @@ body {
 }
 
 .kitchen {
-  width: 770px;
+  width: 700px;
   height: 100%;
-  top: 0;
-  left: 311px;
   position: absolute;
+  top: 0;
+  left: 380px;
   opacity: 0;
 }
 
@@ -398,28 +462,15 @@ body {
 .oven__bacterium {
   position: absolute;
   bottom: 0;
+  top: 17%;
+  left: -24%;
   cursor: pointer;
-}
-
-.switcher-wall {
-  width: 263px;
-  position: absolute;
-  left: 1120px;
-  top: 24px;
-  opacity: 0;
 }
 
 .switcher__bacterium {
   position: absolute;
   top: 230px;
   cursor: pointer;
-}
-
-.bathroom {
-  position: absolute;
-  left: 1512px;
-  width: 500px;
-  opacity: 0;
 }
 
 .sink__bacterium-box {
@@ -437,6 +488,32 @@ body {
   cursor: pointer;
 }
 
+.switcher-wall {
+  width: 400px;
+  position: absolute;
+  left: 1080px;
+  top: 0;
+  opacity: 0;
+}
+
+.bathroom {
+  position: absolute;
+  left: 1480px;
+  width: 580px;
+  height: 100%;
+  opacity: 0;
+}
+
+.sink {
+  width: 300px;
+  height: 100%;
+}
+
+.door {
+  width: 280px;
+  height: 100%;
+}
+
 .timer {
   position: absolute;
   left: 3%;
@@ -444,7 +521,7 @@ body {
   z-index: 100;
   width: 94%;
   height: 36px;
-  border-radius: 30px;
+  border-radius: 0.6rem;
   border: 3px solid var(--color-white);
   opacity: 0;
   pointer-events: none;
@@ -483,7 +560,7 @@ body {
   background-size: cover;
   opacity: 0;
   text-transform: uppercase;
-  font-size: 40px;
+  font-size: 0.8rem;
   width: 100%;
   height: 100%;
 }
@@ -499,10 +576,10 @@ body {
   }
 
   .finish-screen__title {
-    font-size: 60px;
+    font-size: 1.2rem;
   }
 
   .finish-screen__title span {
-    font-size: 100px;
+    font-size: 2rem;
   }
 }
