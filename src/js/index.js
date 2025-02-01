@@ -167,6 +167,10 @@ const startOnboarding = () => {
   timeline.to(popup, {
     opacity: 0, 
     duration: 0.5,
+    onComplete: () => {
+      arrowIconTimeline.pause();
+      fridgeBacterium.style.pointerEvents = 'none';
+    }
   });
 
   timeline.to(foam, {
@@ -189,7 +193,6 @@ const startOnboarding = () => {
     duration: 2, 
     onComplete: () => {
       hideElement(onboardingScreen);
-      jumpingBacteriumTimeline.pause();
       startGame();
     }, 
   },'-=2');
@@ -226,21 +229,15 @@ const runTimer = () => {
   }, '-=10');
 };
 
-const getCanvasWidth = () => {
-  const { width } = game.getBoundingClientRect();
-  return width;
-};
-
-const getFrameWidth = () => {
-  const { width } = banner.getBoundingClientRect();
-  return width;
-};
-
-const resizeCanvasWidth = () => {
-  return getFrameWidth() - getCanvasWidth();
-};
-
 const startGame = () => {
+  const getCanvasSize = game.getBoundingClientRect();
+  const canvasWidth = getCanvasSize.width;
+
+  const getFrameSize = banner.getBoundingClientRect();
+  const frameWidth = getFrameSize.width;
+
+  const canvasEndPositionX = frameWidth - canvasWidth;
+
   showKitchenBacteriums();
 
   gsap.to(game, {
