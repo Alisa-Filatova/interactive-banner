@@ -39,34 +39,34 @@ html {
   --layer-level-1: 10;
   --layer-level-2: 9;
   --layer-level-3: 8;
-}
 
-.hidden {
-  display: none!important;
+  --layer-level-timer: 100;
+  
+  --layer-sublevel-1: 3;
+  --layer-sublevel-2: 2;
 }
 
 .container {
-  margin: 0 auto;
   min-width: 320px;
+  margin: 0 auto;
   font-family: 'Gotham Pro', sans-serif;
+  color: var(--color-white);
 }
 
 .banner {
   position: relative;
   width: 100%;
-  color: var(--color-white);
   margin: 0 auto;
-  overflow: hidden;
   border-radius: 0.4rem;
+  overflow: hidden;
 }
 
 .title {
-  text-transform: uppercase;
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.035rem;
   line-height: 1.1;
-  margin: 0;
+  text-transform: uppercase;
 }
 
 .description {
@@ -78,16 +78,20 @@ html {
 }
 
 .button {
+  border: none;
   border-radius: 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 700;
   text-transform: uppercase;
+  color: inherit;
+  padding: 7% 8%;
   background-color: var(--color-red-light);
   appearance: none;
-  border: none;
-  font-size: 1.1rem;
-  color: var(--color-white);
-  font-weight: 700;
   cursor: pointer;
-  padding: 7% 8%;
+
+  &:hover {
+    background-color: var(--color-red-dark);
+  }
 }
 
 .start-screen,
@@ -101,12 +105,12 @@ html {
 
 .start-screen {
   z-index: var(--layer-level-1);
+  padding: 10% 0 12% 5%;
   background-image: 
     linear-gradient(90deg, var(--color-green-light) 0%, transparent 100%), 
-    url("../img/start-screen-bg.jpg");
+    url("../img/start-screen-bg.webp");
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  padding: 10% 0 12% 5%;
 }
 
 .start-screen__button {
@@ -115,8 +119,8 @@ html {
 
 .start-screen__product {
   display: inline-block;
-  background-color: var(--color-green-dark);
   padding: 2% 2% 1%;
+  background-color: var(--color-green-dark);
 }
 
 .start-screen__bacteriums {
@@ -127,11 +131,11 @@ html {
 
 .start-screen__bacterium {
   position: absolute;
+  height: auto;
 }
 
 .start-screen__bacterium--purple {
   width: 48%;
-  height: auto;
   left: -5%;
   top: 25%;
   transform: rotate(16deg);
@@ -139,16 +143,9 @@ html {
 
 .start-screen__bacterium--brown {
   width: 48%;
-  height: auto;
   right: 5%;
   top: 0;
   transform: rotate(-20deg);
-}
-
-.start-screen__bacterium--salad-green {
-  width: 93%;
-  height: auto;
-  transform: rotate(18deg);
 }
 
 .start-screen__bacterium-box {
@@ -158,6 +155,11 @@ html {
   width: 55%;
   height: 33%;
   overflow: hidden;
+}
+
+.start-screen__bacterium--salad-green {
+  width: 93%;
+  transform: rotate(18deg);
 }
 
 .start-screen__text-block {
@@ -177,8 +179,13 @@ html {
   opacity: 0;
 }
 
+.game__room {
+  width: auto;
+  height: 100%;
+}
+
 .game__screen {
-  z-index: 3;
+  z-index: var(--layer-sublevel-1);
   position: absolute;
   flex-shrink: 0;
   height: 100%;
@@ -193,6 +200,7 @@ html {
   background-image: url('../img/dirty-room.webp');
   background-repeat: no-repeat;
   background-size: cover;
+  pointer-events: none;
 }
 
 .dirt--fridge {
@@ -223,15 +231,9 @@ html {
   clip-path: polygon(74% 0, 84% 0, 85% 100%, 74% 82%);
 }
 
-.popup {
-  display: flex;
-  position: absolute;
-  align-items: center;
-  width: 80%;
-  height: 40%;
-  top: 50%;
-  left: 6%;
-  transform: translateY(-50%);
+.onboarding {
+  width: 42%;
+  height: 100%;
 }
 
 .fridge {
@@ -242,52 +244,58 @@ html {
 
 .fridge__bacterium {
   width: 27%;
-  margin-top: -3%;
   height: auto;
-  cursor: pointer;
   flex-shrink: 0;
+  margin-top: -3%;
+  cursor: pointer;
+}
+
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 6%;
+  display: flex;
+  align-items: center;
+  width: 80%;
+  height: 40%;
+  transform: translateY(-50%);
 }
 
 .popup__description {
+  z-index: -1;
+  position: absolute;
+  left: 23%;
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   gap: 1.08rem;
-  position: absolute;
-  left: 23%;
   width: 90%;
   height: 65%;
   background-color: var(--color-green-fade);
   border-radius: 0.6rem;
-  backdrop-filter: blur(5px);
   font-size: 0.88rem;
   line-height: 1.2;
   font-weight: 400;
-  z-index: -1;
+  backdrop-filter: blur(5px);
   opacity: 0;
-  flex-shrink: 0;
 }
 
 .popup__icon {
   display: block;
   width: 0; 
   height: 0; 
+  flex-shrink: 0;
   border-color: transparent;
   border-style: solid;
   border-width: 0.84rem;
   border-right-color: var(--color-white);
-  flex-shrink: 0;
 }
 
 .foam {
+  z-index: var(--layer-sublevel-2);
   position: absolute;
-  z-index: 2;
-  opacity: 0;
   pointer-events: none;
-}
-
-.onboarding {
-  width: 42%;
-  height: 100%;
+  opacity: 0;
 }
 
 .fridge__foam {
@@ -300,138 +308,34 @@ html {
   background-size: contain;
 }
 
-.oven {
-  width: 48%;
-  height: 64%;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-}
-
 .oven__foam {
+  left: 0;
+  top: -5%;
+  width: 100%;
+  height: 100%;
   background-image: url("../img/foam-puddle-m.png");
   background-repeat: no-repeat;
   background-size: contain;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
 }
 
-.plate {
-  position: absolute;
-  width: 71.5%;
-  height: 38%;
-  left: 0;
-  top: 0;
-}
-
-.plate__foam  {
+.plate__foam {
+  left: 11%;
+  top: 21%;
   width: 90%;
   height: 80%;
   background-image: url("../img/foam-top-m.png");
   background-repeat: no-repeat;
   background-size: contain;
-  left: 11%;
-  top: 21%;
 }
 
 .dishes__foam {
-  background-image: url("../img/foam-top-s.png");
-  background-repeat: no-repeat;
-  background-size: contain;
   top: 24%;
   left: 0;
   width: 100%;
   height: 15%;
-}
-
-.dishes__foam-puddle {
-  background-image: url("../img/foam-puddle-m.png");
+  background-image: url("../img/foam-top-s.png");
   background-repeat: no-repeat;
   background-size: contain;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 65%;
-  transform: translateY(-57%);
-}
-
-.switcher {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.switcher__foam {
-  background-image: url("../img/foam-puddle-s.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  top: 18%;
-  left: 49%;
-  width: 50%;
-  height: 28%;
-}
-
-.sink__foam {
-  background-image: url("../img/foam-top-m.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  left: 2%;
-  top: 17%;
-  width: 100%;
-  height: 20%;
-}
-
-.door__foam {
-  background-image: url("../img/foam-puddle-m.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 75%;
-  height: 60%;
-  top: 14%;
-  left: 43%;
-}
-
-.kitchen {
-  width: 28%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 15.2%;
-}
-
-.plate__bacterium {
-  position: absolute;
-  width: 34%;
-  height: auto;
-  left: 29%;
-  top: 9%;
-  cursor: pointer;
-  opacity: 0;
-}
-
-.dishes {
-  width: 56.2%;
-  height: 100%;
-  position: absolute;
-  left: 48%;
-}
-
-.dishes__bacterium-box {
-  width: 54%;
-  height: 15.9%;
-  position: absolute;
-  left: 39%;
-  top: 19.6%;
-  overflow: hidden;
-  cursor: pointer;
-  opacity: 0;
-}
-
-.dishes__bacterium {
-  width: 100%;
-  height: auto;
 }
 
 .dishes__foam-box {
@@ -442,6 +346,111 @@ html {
   overflow: hidden;
 }
 
+.dishes__foam-puddle {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65%;
+  background-image: url("../img/foam-puddle-m.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: translateY(-57%);
+}
+
+.switcher__foam {
+  top: 18%;
+  left: 49%;
+  width: 50%;
+  height: 28%;
+  background-image: url("../img/foam-puddle-s.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.sink__foam {
+  left: 2%;
+  top: 17%;
+  width: 100%;
+  height: 20%;
+  background-image: url("../img/foam-top-m.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.door__foam {
+  top: 14%;
+  left: 43%;
+  width: 75%;
+  height: 60%;
+  background-image: url("../img/foam-puddle-m.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.kitchen {
+  position: absolute;
+  top: 0;
+  left: 15.2%;
+  width: 28%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.oven {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 48%;
+  height: 64%;
+}
+
+.plate {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 71.5%;
+  height: 38%;
+}
+
+.switcher {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.switcher-wall {
+  position: absolute;
+  left: 42%;
+  top: 0;
+  width: 16%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bathroom {
+  position: absolute;
+  left: 59%;
+  display: flex;
+  width: 21.5%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.sink,
+.door  {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.dishes {
+  position: absolute;
+  left: 48%;
+  width: 56.2%;
+  height: 100%;
+}
+
 .oven__bacterium {
   position: absolute;
   top: 18%;
@@ -450,6 +459,32 @@ html {
   height: auto;
   cursor: pointer;
   opacity: 0;
+}
+
+.plate__bacterium {
+  position: absolute;
+  left: 29%;
+  top: 9%;
+  width: 34%;
+  height: auto;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.dishes__bacterium-box {
+  position: absolute;
+  left: 39%;
+  top: 19.6%;
+  width: 54%;
+  height: 15.9%;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.dishes__bacterium {
+  width: 100%;
+  height: auto;
 }
 
 .switcher__bacterium {
@@ -463,11 +498,11 @@ html {
 
 .sink__bacterium-box {
   position: absolute;
-  overflow: hidden;
-  width: 65%;
-  height: 20%;
   top: 11%;
   left: 26%;
+  width: 65%;
+  height: 20%;
+  overflow: hidden;
   cursor: pointer;
   opacity: 0;
 }
@@ -487,59 +522,29 @@ html {
   opacity: 0;
 }
 
-.switcher-wall {
-  width: 16%;
-  position: absolute;
-  left: 42%;
-  top: 0;
-  opacity: 0;
-}
-
-.bathroom {
-  position: absolute;
-  left: 59%;
-  width: 21.5%;
-  height: 100%;
-  display: flex;
-}
-
-.sink {
-  position: relative;
-  width: 50%;
-  height: 100%;
-  flex-shrink: 0;
-}
-
-.door {
-  position: relative;
-  width: 50%;
-  height: 100%;
-  flex-shrink: 0;
-}
-
 .timer {
+  z-index: var(--layer-level-timer);
   position: absolute;
   left: 3%;
   bottom: 5%;
-  z-index: 100;
   width: 94%;
   height: 4.25%;
   border-radius: 0.6rem;
-  border: 0.04rem solid var(--color-white);
-  opacity: 0;
+  border: 0.06rem solid var(--color-white);
   pointer-events: none;
+  opacity: 0;
 
   &::after {
     content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
     display: block;
-    background-image: url('../img/product.png');
+    background-image: url('../img/product.webp');
     background-repeat: no-repeat;
     background-size: contain;
     width: 14%;
     height: 1000%;
-    position: absolute;
-    right: 0;
-    bottom: 0;
   }
 }
 
@@ -547,23 +552,23 @@ html {
   background-color: var(--color-green-light);
   width: 100%;
   height: 100%;
+  margin-left: auto;
   border-radius: inherit;
   overflow: hidden;
-  margin-left: auto;
 }
 
 .finish-screen {
   z-index: var(--layer-level-3);
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
   padding: 17% 5% 6%;
   background-image: url('../img/finish-bg-2x.webp');
   background-size: cover;
-  opacity: 0;
-  text-transform: uppercase;
   font-size: 0.8rem;
-  width: 100%;
-  height: 100%;
+  text-transform: uppercase;
+  opacity: 0;
 }
 
 .finish-screen__title {
@@ -575,10 +580,20 @@ html {
   margin-bottom: 5%;
 }
 
+.finish-screen__text {
+  width: 68%;
+}
+
+.finish-screen__product {
+  width: 33%;
+  height: auto;
+  margin-top: -8%;
+}
+
 .finish-screen__loose-text {
   display: inline-block;
-  margin-bottom: 1.5%;
   max-width: 60%;
+  margin-bottom: 1.5%;
   line-height: 1.2;
 }
 
@@ -602,22 +617,10 @@ html {
   }
 }
 
-.finish-screen__text {
-  width: 68%;
-}
-
-.finish-screen__product {
-  width: 33%;
-  height: auto;
-  margin-top: -8%;
-}
-
- @media (min-aspect-ratio: 16 / 9) {
-
+@media (min-aspect-ratio: 16 / 9) {
   .container {
     width: 177.77vh;
     height: 100vh;
-    aspect-ratio: 16 / 9;
   }
 
   .banner {
@@ -649,3 +652,7 @@ html {
     background-size: contain;
   }
 } 
+
+.hidden {
+  display: none!important;
+}

@@ -57,13 +57,14 @@
         </div>
         <!-- GAME -->
         <div class="game">
-          <img 
-            src="img/cleaned-room.webp" 
-            height="100%" 
-            width="auto" 
+          <img
+            class="game__room" 
+            src="img/cleaned-room.webp"
+            width="2830"
+            height="810"
             alt=""
             draggable="false"
-          />
+          >
           <!-- Dirt -->
           <div class="dirt dirt--fridge" data-item="fridge"></div>
           <div class="dirt dirt--oven" data-item="oven"></div>
@@ -220,13 +221,16 @@
             <p class="description finish-screen__description">
               От кухни до ванной
             </p>
-            <button class="button finish-screen__button" type="button">
+            <button 
+              class="button finish-screen__button" 
+              type="button"
+            >
               Попробовать
             </button>
           </div>
           <img 
             class="finish-screen__product"
-            src="img/product.png" 
+            src="img/product.webp"
             draggable="false" 
             alt="Крем-пена 100% Чистота" 
             width="320"
@@ -234,7 +238,6 @@
         </div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/index.js" type="module"></script>
   </body>
 </html>
