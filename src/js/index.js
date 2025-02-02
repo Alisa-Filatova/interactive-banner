@@ -26,7 +26,7 @@ const arrowIconTimeline = gsap.timeline();
 
 const showElement = (element, duration = 0.5, delay = 0) => {
   gsap.to(element, {
-    opacity: 1, 
+    opacity: 1,
     duration: duration,
     delay: delay,
   });
@@ -34,8 +34,8 @@ const showElement = (element, duration = 0.5, delay = 0) => {
 
 const hideElement = (element, duration = 0.5) => {
   gsap.to(element, {
-    opacity: 0, 
-    duration: duration, 
+    opacity: 0,
+    duration: duration,
     onComplete: () => {
       element.classList.add('hidden');
     },
@@ -69,18 +69,18 @@ const resizeFont = () => {
 
 const bannerTextTween = (title, text, button) => {
   const timeline = gsap.timeline();
- 
-  timeline.from(title, { 
+
+  timeline.from(title, {
     opacity: 0,
     duration: 2,
   });
-  
-  timeline.from(text, { 
+
+  timeline.from(text, {
     opacity: 0,
     duration: 1.5,
   }, '-=1.2');
-  
-  timeline.from(button, { 
+
+  timeline.from(button, {
     opacity: 0,
     scale: 1.1,
     duration: 1.5,
@@ -89,15 +89,15 @@ const bannerTextTween = (title, text, button) => {
 };
 
 const jumpingBacteriumsTween = () => {
-  jumpingBacteriumTimeline.to('.start-screen__bacterium--salad-green', { 
+  jumpingBacteriumTimeline.to('.start-screen__bacterium--salad-green', {
     y: 20,
     duration: 1.5,
     repeat: -1,
     yoyo: true,
     ease: 'bounce.out',
   });
-  
-  jumpingBacteriumTimeline.to('.start-screen__bacterium--purple', { 
+
+  jumpingBacteriumTimeline.to('.start-screen__bacterium--purple', {
     y: 30,
     duration: 2,
     repeat: -1,
@@ -105,7 +105,7 @@ const jumpingBacteriumsTween = () => {
     ease: 'bounce.out',
   }, '-=1');
 
-  jumpingBacteriumTimeline.to('.start-screen__bacterium--brown', { 
+  jumpingBacteriumTimeline.to('.start-screen__bacterium--brown', {
     y: 25,
     duration: 1,
     repeat: -1,
@@ -130,14 +130,14 @@ const showOnboardingPopup = () => {
   showElement(fridgeBacterium);
   showElement(popupDescription);
 
-  arrowIconTimeline.to('.popup__icon', { 
+  arrowIconTimeline.to('.popup__icon', {
     x: 20,
     repeat: -1,
     duration: 0.5,
     yoyo: true,
     delay: 0.5,
     ease: 'power.inOut',
-  });      
+  });
 };
 
 const showGameScreen = () => {
@@ -165,7 +165,7 @@ const startOnboarding = () => {
   const item = getItem(fridgeBacterium);
 
   timeline.to(popup, {
-    opacity: 0, 
+    opacity: 0,
     duration: 0.5,
     onComplete: () => {
       arrowIconTimeline.pause();
@@ -174,27 +174,27 @@ const startOnboarding = () => {
   });
 
   timeline.to(foam, {
-    opacity: 1, 
+    opacity: 1,
     duration: 0.5,
   });
 
   timeline.to(foam, {
-    y: '60%', 
+    y: '60%',
     duration: 2,
   });
 
   timeline.to(dirt, {
-    opacity: 0, 
+    opacity: 0,
     duration: 2,
   }, '-=2');
 
   timeline.to(foam, {
-    opacity: 0, 
-    duration: 2, 
+    opacity: 0,
+    duration: 2,
     onComplete: () => {
       hideElement(onboardingScreen);
       startGame();
-    }, 
+    },
   },'-=2');
 
   setDataCleaned(item);
@@ -214,17 +214,17 @@ const runTimer = () => {
   const timerBar = document.querySelector('.timer__bar');
 
   timeline.to(timer, {
-    opacity: 1, 
+    opacity: 1,
     duration: 0.5,
   });
 
   timeline.to(timerBar, {
-    width: '3%', 
+    width: '3%',
     duration: gameTime,
   });
 
   timeline.to(timerBar, {
-    backgroundColor: 'var(--color-red-light)', 
+    backgroundColor: 'var(--color-red-light)',
     duration: 5,
   }, '-=10');
 };
@@ -241,9 +241,9 @@ const startGame = () => {
   showKitchenBacteriums();
 
   gsap.to(game, {
-    x: canvasEndPositionX, 
-    duration: gameTime, 
-    delay: 1, 
+    x: canvasEndPositionX,
+    duration: gameTime,
+    delay: 1,
     ease: 'power.out',
     onComplete: () => {
       finishGame();
@@ -303,8 +303,8 @@ const showFinishScreen = () => {
   showElement(finishScreen, 1);
 
   bannerTextTween(
-    '.finish-screen__title', 
-    '.finish-screen__description', 
+    '.finish-screen__title',
+    '.finish-screen__description',
     '.finish-screen__button',
   );
 };
@@ -327,12 +327,12 @@ ovenBacterium.addEventListener('click', () => {
   const dirt = getDirt(ovenBacterium);
 
   timeline.to(ovenBacterium, {
-    opacity: 0, 
+    opacity: 0,
     duration: 0.5,
   });
 
   timeline.to(foam, {
-    opacity: 1, 
+    opacity: 1,
     duration: 1,
   });
 
@@ -342,14 +342,14 @@ ovenBacterium.addEventListener('click', () => {
   });
 
   timeline.to(foam, {
-    opacity: 0, 
+    opacity: 0,
     duration: 2,
   }, '-=1');
 
   timeline.to(dirt, {
-    opacity: 0, 
+    opacity: 0,
     duration: 2,
-    onComplete: () => dirt.style.display = 'none',  
+    onComplete: () => dirt.style.display = 'none',
   }, '-=2');
 
   setDataCleaned(item);
@@ -364,24 +364,24 @@ plateBacterium.addEventListener('click', () => {
   const item = getItem(plateBacterium);
 
   timeline.to(plateBacterium, {
-    opacity: 0, 
+    opacity: 0,
     duration: 0.5,
   });
 
   timeline.to(foam, {
-    opacity: 1, 
+    opacity: 1,
     duration: 1,
   }, '-=0.5');
 
   timeline.to(foam, {
-    opacity: 0, 
+    opacity: 0,
     duration: 3,
   });
 
   timeline.to(dirt, {
-    opacity: 0, 
+    opacity: 0,
     duration: 3,
-    onComplete: () => dirt.style.display = 'none',  
+    onComplete: () => dirt.style.display = 'none',
   }, '-=3');
 
   setDataCleaned(item);
@@ -397,22 +397,22 @@ dishesBacterium.addEventListener('click', () => {
   const item = getItem(dishesBacterium);
 
   timeline.to(dishesBacterium, {
-    opacity: 0, 
+    opacity: 0,
     duration: 0.5,
   });
 
   timeline.to(foam, {
-    opacity: 1, 
+    opacity: 1,
     duration: 1,
   },'-=0.5');
 
   timeline.to(dishesFoamPuddle, {
-    opacity: 1, 
+    opacity: 1,
     duration: 1,
   }, '-=1');
 
   timeline.to(foam, {
-    opacity: 0, 
+    opacity: 0,
     duration: 2,
   });
 
@@ -422,14 +422,14 @@ dishesBacterium.addEventListener('click', () => {
   }, '-=2');
 
   timeline.to(dishesFoamPuddle, {
-    opacity: 0, 
+    opacity: 0,
     duration: 2,
   }, '-=2');
 
   timeline.to(dirt, {
-    opacity: 0, 
+    opacity: 0,
     duration: 2,
-    onComplete: () => dirt.style.display = 'none',  
+    onComplete: () => dirt.style.display = 'none',
   }, '-=2');
 
   setDataCleaned(item);
@@ -444,12 +444,12 @@ switcherBacterium.addEventListener('click', () => {
   const item = getItem(switcherBacterium);
 
   timeline.to(switcherBacterium, {
-    opacity: 0, 
+    opacity: 0,
     duration: 0.5,
   });
 
   timeline.to(foam, {
-    opacity: 1, 
+    opacity: 1,
     duration: 0.5,
   });
 
@@ -459,14 +459,14 @@ switcherBacterium.addEventListener('click', () => {
   });
 
   timeline.to(foam, {
-    opacity: 0, 
+    opacity: 0,
     duration: 2,
   }, '-=2');
 
   timeline.to(dirt, {
-    opacity: 0, 
+    opacity: 0,
     duration: 2,
-    onComplete: () => dirt.style.display = 'none',  
+    onComplete: () => dirt.style.display = 'none',
   }, '-=2');
 
   setDataCleaned(item);
@@ -484,24 +484,24 @@ sinkBacterium.addEventListener('click', () => {
   const item = getItem(sinkBacterium);
 
   timeline.to(sinkBacterium, {
-    opacity: 0, 
+    opacity: 0,
     duration: 0.5,
   });
 
   timeline.to(foam, {
-    opacity: 1, 
+    opacity: 1,
     duration: 1,
   }, '-=0.5');
 
   timeline.to(foam, {
-    opacity: 0, 
+    opacity: 0,
     duration: 2,
   });
 
   timeline.to(dirt, {
-    opacity: 0, 
+    opacity: 0,
     duration: 2,
-    onComplete: () => dirt.style.display = 'none',  
+    onComplete: () => dirt.style.display = 'none',
   }, '-=2');
 
   setDataCleaned(item);
@@ -515,12 +515,12 @@ doorBacterium.addEventListener('click', () => {
   const item = getItem(doorBacterium);
 
   timeline.to(doorBacterium, {
-    opacity: 0, 
+    opacity: 0,
     duration: 0.5,
   });
 
   timeline.to(foam, {
-    opacity: 1, 
+    opacity: 1,
     duration: 1,
   }, '-=0.4');
 
@@ -530,14 +530,14 @@ doorBacterium.addEventListener('click', () => {
   });
 
   timeline.to(foam, {
-    opacity: 0, 
+    opacity: 0,
     duration: 1.5,
   }, '-=1');
 
   timeline.to(dirt, {
-    opacity: 0, 
+    opacity: 0,
     duration: 1.5,
-    onComplete: () => dirt.style.display = 'none',  
+    onComplete: () => dirt.style.display = 'none',
   }, '-=2');
 
   setDataCleaned(item);
