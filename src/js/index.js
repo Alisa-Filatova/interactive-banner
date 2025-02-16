@@ -211,22 +211,21 @@ const showKitchenBacteriums = () => {
 
 const runTimer = () => {
   const timeline = gsap.timeline();
-  const timerBar = document.querySelector('.timer__bar');
 
   timeline.to(timer, {
     opacity: 1,
     duration: 0.5,
   });
 
-  timeline.to(timerBar, {
-    width: '3%',
+  timeline.to('.timer-product', {
+    opacity: 1,
+    duration: 0.5,
+  }, '-=0.5');
+
+  timeline.to('.timer__bar', {
+    x: '95%',
     duration: gameTime,
   });
-
-  timeline.to(timerBar, {
-    backgroundColor: 'var(--color-red-light)',
-    duration: 5,
-  }, '-=10');
 };
 
 const startGame = () => {
@@ -282,6 +281,7 @@ const showBathroomBacteriums = () => {
 
 const hideGameScreen = () => {
   hideElement(timer);
+  hideElement('.timer-product');
   hideElement(game);
 };
 
